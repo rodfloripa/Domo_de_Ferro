@@ -44,7 +44,8 @@ constraints += [
     z[k_hit] == alvo_z[k_hit],
     z >= 0  # Garante que o interceptador permaneça acima do solo
 ]
-``
+```
+
 <p align="justify"><h3>4. Função Objetivo: Minimização de Esforço</h3></p>
 
 <p align="justify">Para que o interceptador seja eficiente, minimizamos a "energia" gasta, representada pela soma dos quadrados das acelerações. Como a soma de quadrados é uma função convexa, o CVXPY consegue resolvê-la rapidamente.</p>
