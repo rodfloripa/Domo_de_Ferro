@@ -30,20 +30,21 @@ constraints = [
 ```
 
 
-<p align="justify"><h3>3. A Condição de Interceptação</h3></p>
+<p align="justify"><h3>3. Condições de Interceptação e Segurança</h3></p>
 
-<p align="justify">O "objetivo" físico é traduzido como uma restrição de igualdade. No instante do impacto (índice <i>k_hit</i>), a posição do interceptador deve ser exatamente igual à posição do alvo (alvo_x, alvo_y, alvo_z).</p>
+<p align="justify">O "objetivo" físico é traduzido como uma restrição de igualdade no instante do impacto (índice <i>k_hit</i>). Além disso, impomos uma <b>restrição de desigualdade</b> para a altura mínima (<i>z_min</i>), garantindo que o interceptador nunca colida com o solo durante a manobra.</p>
 
-```
+``` 
 Python
 
-# Restrição de impacto no tempo k_hit
+# Restrição de impacto e altura mínima
 constraints += [
     x[k_hit] == alvo_x[k_hit],
     y[k_hit] == alvo_y[k_hit],
-    z[k_hit] == alvo_z[k_hit]
+    z[k_hit] == alvo_z[k_hit],
+    z >= 0  # Garante que o interceptador permaneça acima do solo
 ]
-```
+``
 <p align="justify"><h3>4. Função Objetivo: Minimização de Esforço</h3></p>
 
 <p align="justify">Para que o interceptador seja eficiente, minimizamos a "energia" gasta, representada pela soma dos quadrados das acelerações. Como a soma de quadrados é uma função convexa, o CVXPY consegue resolvê-la rapidamente.</p>
@@ -57,11 +58,25 @@ problema = cp.Problem(objetivo, constraints)
 problema.solve()
 ```
 
-<p align="justify"><h3>5. Análise de Convexidade e Estrutura DCP</h3></p>
+<p align="justify"><h3>5. Fundamentos da Convexidade</h3></p>
 
-<p align="justify">O sucesso deste modelo reside na sua classificação como <b>DCP (Disciplined Convex Programming)</b>. Ao fixar o tempo de interceptação e tratar a trajetória do alvo como um parâmetro fixo, evitamos termos não lineares que tornariam o problema impossível de resolver globalmente. A ausência de arrasto aerodinâmico complexo e o uso de funções de custo quadráticas permitem que o sistema encontre a trajetória ideal em milissegundos, garantindo estabilidade numérica e precisão no impacto.</p>
+<p align="justify">O que garante a robustez matemática deste modelo é a <b>convexidade</b>. Nenhuma operação mistura variáveis de forma multiplicativa ou discreta. Tudo no modelo é construído rigorosamente usando combinações lineares, constantes e funções convexas conhecidas, como normas e quadrados.</p>
 
-<p align="justify"><h3>6. Conclusão Técnica e Video</h3></p>
+<p align="justify"><h3>6. O que quebraria a convexidade (Regras DCP)</h3></p>
+
+<p align="justify">É fundamental evitar certos elementos que impediriam o solver de encontrar a solução ótima global. Se você alterar o código para incluir qualquer um dos itens abaixo, o problema deixa de ser <b>DCP (Disciplined Convex Programming)</b>:</p>
+
+<p align="justify">
+<ul>
+<li>Termos como v² no modelo (como o arrasto do ar);</li>
+<li>Produto entre variáveis (ex: x * v);</li>
+<li>Otimização do tempo de interceptação (tornar o tempo uma variável);</li>
+<li>Restrições do tipo “mínimo tempo”;</li>
+<li>Lógica condicional (uso de <i>if</i> dentro do modelo de otimização).</li>
+</ul>
+</p>
+
+<p align="justify"><h3>7. Conclusão Técnica e Video</h3></p>
 
 <p align="justify">Ao estruturar o problema como um controle ótimo linear com custo quadrático, garantimos que o sistema não apenas funcione, mas seja o mais eficiente possível dentro dos limites físicos estabelecidos pelas restrições de aceleração máxima e altura mínima.</p>
 
