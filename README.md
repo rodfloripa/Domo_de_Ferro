@@ -61,6 +61,8 @@ problema.solve()
 
 <p align="justify">O sucesso deste modelo reside na sua classificação como <b>DCP (Disciplined Convex Programming)</b>. Ao fixar o tempo de interceptação e tratar a trajetória do alvo como um parâmetro fixo, evitamos termos não lineares que tornariam o problema impossível de resolver globalmente. A ausência de arrasto aerodinâmico complexo e o uso de funções de custo quadráticas permitem que o sistema encontre a trajetória ideal em milissegundos, garantindo estabilidade numérica e precisão no impacto.</p>
 
-<p align="justify"><h3>6. Conclusão Técnica</h3></p>
+<p align="justify"><h3>6. Conclusão Técnica e Video</h3></p>
 
 <p align="justify">Ao estruturar o problema como um controle ótimo linear com custo quadrático, garantimos que o sistema não apenas funcione, mas seja o mais eficiente possível dentro dos limites físicos estabelecidos pelas restrições de aceleração máxima e altura mínima.</p>
+
+![Video](https://github.com/rodfloripa/Domo_de_Ferro/blob/main/interceptacao(1).gif)
