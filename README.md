@@ -32,7 +32,7 @@ constraints = [
 
 <p align="justify"><h3>3. Condição de Interceptação e Altura Crítica</h3></p>
 
-<p align="justify">O "objetivo" físico é traduzido como uma restrição de igualdade no instante do impacto (índice <i>k_hit</i>). Um ponto crucial é a <b>restrição de altura mínima no choque</b>: garantimos que a interceptação ocorra acima de um limite de segurança (<i>z_min</i>), impedindo que o sistema valide uma colisão que aconteça tarde demais, ou seja, após o alvo já ter atingido o solo.</p>
+<p align="justify">O "objetivo" físico é traduzido como uma restrição de igualdade no instante do impacto (índice <i>k_hit</i>). Um ponto crucial é a <b>restrição de altura mínima no choque</b>: garantimos que a interceptação ocorra acima de um limite de segurança (<i>z_min</i>), impedindo que o sistema valide uma colisão que aconteça em uma altura muito baixa, oque seria um risco para a população.</p>
 
 ```
 Python
@@ -42,7 +42,7 @@ constraints += [
     x[k_hit] == alvo_x[k_hit],
     y[k_hit] == alvo_y[k_hit],
     z[k_hit] == alvo_z[k_hit],
-    z[k_hit] >= h_min  # Garante que o choque ocorra no ar
+    z[k_hit] >= h_min  # Garante que o choque ocorra na altura minima
 ]
 ```
 
