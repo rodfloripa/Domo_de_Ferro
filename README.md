@@ -1,4 +1,4 @@
-<p align="justify"><h1>Projeto de Interceptação com Otimização Convexa: Inspirado no Domo de Ferro</h1></p>
+<p align="justify"><h1>Domo de Ferro com CVXY</h1></p>
 
 <p align="justify"><b>Objetivo do Projeto:</b> Este projeto visa desenvolver um sistema de controle para um interceptador capaz de neutralizar alvos em movimento no espaço 3D, utilizando princípios de otimização matemática. A principal inspiração para este modelo é o <b>Domo de Ferro (Iron Dome)</b>, um sistema de defesa aérea móvel desenvolvido por Israel. O Domo de Ferro foi projetado para interceptar e destruir foguetes de curto alcance e projéteis de artilharia disparados de distâncias próximas. Ele funciona identificando a ameaça via radar, calculando sua trajetória e lançando um míssil interceptador apenas se o alvo representar um risco a áreas povoadas. O desafio central aqui é reproduzir essa inteligência: calcular a trajetória que minimize o consumo de energia (esforço de aceleração) enquanto garante o impacto no ponto e tempo exatos.</p>
 
